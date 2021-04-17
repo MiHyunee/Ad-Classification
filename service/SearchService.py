@@ -2,8 +2,8 @@ import ssl
 import urllib
 import json
 
-client_id = "lnu8RlxINPdSr3zWYi23"
-client_secret = "YBOTF4uitZ"
+client_id = "client_id"
+client_secret = "client_secret"
 
 
 def searchBlog(search_word):
