@@ -2,8 +2,8 @@ import ssl
 import urllib
 import json
 
-client_id = "lnu8RlxINPdSr3zWYi23"
-client_secret = "YBOTF4uitZ"
+client_id = "t1LyzwrwLr4ABsLveG1a"
+client_secret = "tknZJK1Ryd"
 
 
 def searchBlog(search_word):
@@ -32,8 +32,8 @@ def searchBlog(search_word):
             blog[k][0] = i['title']
             #redirection 걸려있는 링크로 하면 body가 iframe으로 대체되서 내용 다 안나
             # iframe의 src 보니까 아래처럼 바꾸면 될것같음
-            tmp = i['link'].replace("https://blog.naver.com/", '').replace('?', '').replace("Redirect=Log", '')
-            blog[k][1] = "https://blog.naver.com/PostView.nhn?blogId=" + tmp
+            blogId = i['link'].replace("https://blog.naver.com/", '').replace('?', '').replace("Redirect=Log", '')
+            blog[k][1] = "https://blog.naver.com/PostView.nhn?blogId=" + blogId
             k = k + 1
 
         print(blog)
