@@ -6,20 +6,23 @@ from model.ImagePath import ImagePath
 def crawlingSource(blogArray):
     for i in range(100):
         url = blogArray[i].getPageUrl()
+        print(url)
         webpage = requests.get(url)
         soup = BeautifulSoup(webpage.content, "html.parser")
 
         #text 추출
-        text = []
-        text_all = soup.find(attrs={'class': 'se-main-container'}).find_all('span')
-        for i in text_all:
-            t = i.text
+        textArray = []
+        text_all = soup.find(attrs={'id': 'postListBody'}).find_all('span')
+        #text_all = soup.find(attrs={'class': 'se-main-container'}).find_all('span')
+        for text in text_all:
+            t = text.text
             if (t != '\u200b'):
                 if (('#' not in t) & ('http' not in t)):
-                    text.append(t)
+                    textArray.append(t.replace('\n', ''))
 
-        blogArray[i].setFirstText(text[0])
-        blogArray[i].setLastText(text[-1])
+        blogArray[i].setFirstText(textArray[0])
+        print(blogArray[i].getFirstText())
+        blogArray[i].setLastText(textArray[-1])
 
         #이미지 url 추출
         img = soup.find_all(attrs={'class': 'se-image-resource'})
