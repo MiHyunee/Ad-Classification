@@ -11,12 +11,15 @@ def crawlingSource(blogArray):
 
         #이미지 url 얻기
         img = soup.find_all(attrs={'class': 'se-image-resource'})
-        firstImage = img[0].get("src")
-        firstImageWithSize = firstImage.replace('w80_blur', 'w966')
-        blogArray[i].getImagePath().setFirstImage(firstImageWithSize)
-        lastImage = img[-1].get("src")
-        lastImageWithSize = lastImage.replace('w80_blur', 'w966')
-        blogArray[i].getImagePath().setLastImage(lastImageWithSize)
+        if len(img)==0:
+            img = soup.find_all(attrs={'class': '_photoImage'})
+        if len(img)>0:
+            firstImage = img[0].get("src")
+            firstImageWithSize = firstImage.replace('w80_blur', 'w966')
+            blogArray[i].getImagePath().setFirstImage(firstImageWithSize)
+            lastImage = img[-1].get("src")
+            lastImageWithSize = lastImage.replace('w80_blur', 'w966')
+            blogArray[i].getImagePath().setLastImage(lastImageWithSize)
 
         #스티커 url 얻기
         sticker = soup.find_all(attrs={'class': 'se-sticker-image'})
