@@ -3,8 +3,8 @@ import urllib
 import json
 from model.BlogPage import BlogPage
 
-client_id = "client_id"
-client_secret = "client_secret"
+client_id = "_SdymsLP_TCuIfpjPuz7"
+client_secret = "mImtapr7Mh"
 
 def searchBlog(search_word):
     display = "100"
@@ -21,20 +21,20 @@ def searchBlog(search_word):
         response_body = response.read()
         json_data = json.loads(response_body.decode('utf-8'))
 
-        # blog 라는 2차원 배열 초기화
-        blogPageArray = []
-        for i in range(int(display)):
-            blogPageArray.append(BlogPage())
-
         # blog는 title, link를 담는 이차원 배열
+        blogPageArray = []
         k = 0
         for i in json_data['items']:
-            blogPageArray[k].setTitle(i['title'])
-            #redirection 걸려있는 링크로 하면 body가 iframe으로 대체되서 내용 다 안나
-            # iframe의 src 보니까 아래처럼 바꾸면 될것같음
-            blogId = i['link'].replace("https://blog.naver.com/", '').replace('?', '').replace("Redirect=Log", '')
-            blogPageArray[k].setPageUrl("https://blog.naver.com/PostView.nhn?blogId=" + blogId)
-            k = k + 1
+            #네이버 블로그만 필터
+            if('naver' in i['link']):
+                # blog 라는 2차원 배열 초기화
+                blogPageArray.append(BlogPage())
+                # link
+                blogId = i['link'].replace("https://blog.naver.com/", '').replace('?', '').replace("Redirect=Log", '')
+                blogPageArray[k].setPageUrl("https://blog.naver.com/PostView.nhn?blogId=" + blogId)
+                # title
+                blogPageArray[k].setTitle(i['title'])
+                k = k + 1
 
     else:
         print("Error Code:" + rescode)
