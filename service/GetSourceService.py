@@ -42,4 +42,5 @@ def crawlingSource(blogArray):
 
         print("{0} sticker: {1}".format(k, i.getSticker()))
         k=k+1
+    return blogArray
 

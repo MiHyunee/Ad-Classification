@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, request
 from service.SearchService import searchBlog
 from service.GetSourceService import crawlingSource
+from service.ocrService import ocrTest
 from model.BlogPage import BlogPage
 from model.ImagePath import ImagePath
 
@@ -13,4 +14,5 @@ def form():
     print(query)
     blogPageArray = searchBlog(query)
     blogPageArray = crawlingSource(blogPageArray)
+    ocrTest(blogPageArray)
     return query
