@@ -25,7 +25,7 @@ data_set = pd.read_excel(dwn_url)
 data = data_set.to_numpy() #pandas객체를 numpy화
 x=[]
 y=[]
-for index, d in enumerate(data)
+for index, d in enumerate(data):
     p = re.compile("\W+")
     x.append(p.sub(" ",d[0]))
     y.append(d[1])
@@ -34,7 +34,7 @@ x=np.array(x)
 y=np.array(y)
 
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.2, random_state=0)
-
+'''
 #모델
 svm=svm.SVC()
 svm.fit(model_train, y_train) #model_train은 벡터화된 x_train
@@ -58,3 +58,4 @@ print(metrics.accuracy_score(y_test, result))
 
 #학습된 모델 저장
 joblib.dump(svm_best, './svm_vest.pkl')
+'''
