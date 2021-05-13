@@ -6,22 +6,10 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Embedding
 
 
+
 okt = Okt()
 
-def tokenizer() :
-    dwn_url = '/Users/software/Downloads/dataSet.csv'
-    data = pd.read_csv(dwn_url, error_bad_lines=False, encoding='utf-8', header=0)
-
-    print("총 샘플 수 : ", len(data))
-
-    data['class'] = data['class'].replace(['none', 'ad'], [0, 1])
-    data.drop_duplicates(subset='문장', inplace=True)
-
-    x_data = data['문장']
-    y_data = data['class']
-    print('text 수:', len(x_data))
-    print('class 수: ', len(y_data))
-
+def tokenizer(x_data) :
     text_results = []
     for text in x_data:
         token = okt.pos(text, norm=True, stem=True)
@@ -41,14 +29,14 @@ def tokenizer() :
 
     return text_results
 
-'''
 def token2vec(text_results):
     vocab_size = 1000
     tokenizer = Tokenizer(num_words=vocab_size)
     tokenizer.fit_on_texts(text_results)
     sequence = tokenizer.texts_to_sequences(text_results)
 
-    model = Sequential()
-    model.add(Embedding(vocab_size, 4))
     print(sequence)
-'''
+
+    return sequence
+
+
