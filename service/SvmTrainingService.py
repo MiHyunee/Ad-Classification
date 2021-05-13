@@ -10,13 +10,7 @@ import re
 
 #data load
 data_set = pd.read_excel("/Users/smwu/Desktop/data_set.xlsx")
-'''
-#google drive spreadsheet load
-url = "https://docs.google.com/spreadsheets/d/1CGp9VJsO5NSY57AJMM7wmYcfEZpL0lyn9srYlIQVbqo/view?usp=sharing"
-file_id = url.split('/')[-2]
-dwn_url = 'https://drive.google.com/uc?id=' + file_id
-data_set = pd.read_excel(dwn_url)
-'''
+
 #행, 열 추출 방법1
 #x1 = data_set.iloc[:, 0]
 #y1 = data_set.iloc[:, 1]
