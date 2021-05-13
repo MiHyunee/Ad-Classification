@@ -6,6 +6,7 @@ import numpy as np
 import pandas as pd
 import joblib
 import pickle
+import re
 
 #data load
 data_set = pd.read_excel("/Users/smwu/Desktop/data_set.xlsx")
@@ -25,7 +26,8 @@ data = data_set.to_numpy() #pandas객체를 numpy화
 x=[]
 y=[]
 for index, d in enumerate(data)
-    x.append(d[0])
+    p = re.compile("\W+")
+    x.append(p.sub(" ",d[0]))
     y.append(d[1])
 
 x=np.array(x)
