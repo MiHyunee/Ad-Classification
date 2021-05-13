@@ -12,6 +12,7 @@ class BlogPage:
         self.__firstOCR = None
         self.__lastOCR = None
         self.__stickerOCR = None
+        self.__isAd = None
 
     def setTitle(self, newTitle):
         self.__title = newTitle
@@ -40,6 +41,9 @@ class BlogPage:
     def setStickerOCR(self, newStickerOCR):
         self.__stickerOCR = newStickerOCR
 
+    def setIsAd(self, newIsAd):
+        self.__isAd = newIsAd
+
     def getTitle(self):
         return self.__title
 
@@ -66,3 +70,6 @@ class BlogPage:
 
     def getStickerOCR(self):
         return self.__stickerOCR
+
+    def getIsAd(self):
+        self.__isAd

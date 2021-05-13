@@ -1,26 +1,25 @@
-from sklearn import svm, metrics
-from sklearn.model_selection import train_test_split
-import numpy as np
-import pandas as pd
+import joblib
 
-#data load
-data_set = pd.read_excel("/Users/smwu/Desktop/data_set.xlsx")
+def svm(blogArray):
+    #model load
+    model = joblib.load('./svm_best.pkl')
 
-#행, 열 추출 방법1
-#x1 = data_set.iloc[:, 0]
-#y1 = data_set.iloc[:, 1]
+    #객체마다 분석
+    for i in blogArray:
+        test = i.getTitle()+i.getFirstText()+i.getLastText()\
+               +i.getFirstOCR+i.getLastOCR()+i.getStickerOCR()
 
-#행, 열 추출 방법2
-data = data_set.to_numpy() #pandas객체를 numpy화
-x=[]
-y=[]
-for index, d in enumerate(data):
-    x.append(d[0])
-    y.append(d[1])
-
-x=np.array(x)
-y=np.array(y)
-
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.2, random_state=0)
-
-
+        i.setIsAd(model.predict(test))
+    '''
+    #한문장씩 테스트 돌리기
+    t = model.predict(i.getTitle())
+    ft = model.predict(i.getFirstText())
+    lt = model.predict(i.getLastText())
+    fo = model.predict(i.getFirstOCR())
+    lo = model.predict(i.getLastOCR())
+    st = model.predict(i.getStickerOCR())
+    if(t+ft+lt_fo+lo+st == 0):
+        i.setIsAd(FALSE)
+    else:
+        i.setIsAd(TRUE)
+    '''

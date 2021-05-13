@@ -31,3 +31,4 @@ def ocrTest(blogArray):
             i.setStickerOCR(text.replace("\n", ' '))
             print("{0} stickerOCR: {1}".format(k, i.getStickerOCR()))
         k=k+1
+    return blogArray
