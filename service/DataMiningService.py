@@ -41,13 +41,15 @@ def tokenizer() :
 
     return text_results
 
-'''
+
 def token2vec(text_results):
     vocab_size = 1000
     tokenizer = Tokenizer(num_words=vocab_size)
     tokenizer.fit_on_texts(text_results)
     sequence = tokenizer.texts_to_sequences(text_results)
 
+    print(sequence)
+'''
     model = Sequential()
     model.add(Embedding(vocab_size, 4))
     print(sequence)
