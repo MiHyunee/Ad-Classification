@@ -34,9 +34,12 @@ def token2vec(text_results):
     tokenizer = Tokenizer(num_words=vocab_size)
     tokenizer.fit_on_texts(text_results)
     sequence = tokenizer.texts_to_sequences(text_results)
-
     print(sequence)
 
     return sequence
+'''
+    model = Sequential()
+    model.add(Embedding(vocab_size, 4))
+'''
 
 
