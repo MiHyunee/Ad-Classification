@@ -10,15 +10,20 @@ def crawlingSource(blogArray):
         webpage = requests.get(url)
         soup = BeautifulSoup(webpage.content, "html.parser")
 
-        #text 추출
+        # text 추출
         textArray = []
-        text_all = soup.find(attrs={'id': 'postListBody'}).find_all('span')
-        #text_all = soup.find(attrs={'class': 'se-main-container'}).find_all('span')
+        text_all = soup.find('div', {'class': 'se-main-container'})
+        if (text_all == None):
+            text_all = soup.find('div', {'id': 'postViewArea'}).find_all('span')
+        else:
+            text_all = text_all.find_all('span')
         for text in text_all:
             t = text.text
             if (t != '\u200b'):
                 if (('#' not in t) & ('http' not in t)):
-                    textArray.append(t.replace('\n', ''))
+                    tt = t.replace('\n', '').replace('\xa0', '')
+                    if (tt != ''):
+                        textArray.append(tt)
 
         i.setFirstText(textArray[0])
         i.setLastText(textArray[-1])
@@ -43,3 +48,4 @@ def crawlingSource(blogArray):
         print("{0} sticker: {1}".format(k, i.getSticker()))
         k=k+1
 
+    return blogArray
