@@ -39,6 +39,11 @@ def svmTraining(x_sequence, y_data):
     result = svm_model.predict(x_test)
     print("Test Accuracy: ", metrics.accuracy_score(y_test, result))
 
+    #모델 저장
+    joblib.dump(svm_model, "static/svm_model.pkl")
+
+    return max_len
+'''
     #최적화
     pipe_svc = make_pipeline(StandardScaler(), svm.SVC())
     param_range = [0.0001, 0.001, 0.01, 0.1, 1.0, 10.0, 100.0, 1000.0]
@@ -55,4 +60,4 @@ def svmTraining(x_sequence, y_data):
 
     #학습된 모델 저장
     #joblib.dump(gs, './svm_vest.pkl')
-
+'''

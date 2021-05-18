@@ -3,16 +3,16 @@ from .ImagePath import ImagePath
 class BlogPage:
 
     def __init__(self):
-        self.__title = None
-        self.__pageUrl = None
+        self.__title = ""
+        self.__pageUrl = ""
         self.__imagePath = ImagePath()
-        self.__sticker = None
-        self.__firstText = None
-        self.__lastText = None
-        self.__firstOCR = None
-        self.__lastOCR = None
-        self.__stickerOCR = None
-        self.__isAd = None
+        self.__sticker = ""
+        self.__firstText = ""
+        self.__lastText = ""
+        self.__firstOCR = ""
+        self.__lastOCR = ""
+        self.__stickerOCR = ""
+        self.__isAd = ""
 
     def setTitle(self, newTitle):
         self.__title = newTitle

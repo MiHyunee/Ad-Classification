@@ -1,15 +1,28 @@
 import joblib
+from . import DataMiningService as dm
+from tensorflow.keras.preprocessing.sequence import pad_sequences
 
-def svm(blogArray):
+
+def svm(blogArray, vecMaxLen):
     #model load
-    model = joblib.load('./svm_best.pkl')
+    model = joblib.load('static/svm_model.pkl')
 
     #객체마다 분석
     for i in blogArray:
-        test = i.getTitle()+i.getFirstText()+i.getLastText()\
-               +i.getFirstOCR+i.getLastOCR()+i.getStickerOCR()
+        title = i.getTitle()
+        firstText = i.getFirstText()
+        lastText = i.getLastText()
+        firstOcr = i.getFirstOCR()
+        lastOcr = i.getLastOCR()
+        stickerOcr = i.getStickerOCR()
+        text = title + firstText + lastText + lastOcr + firstOcr + stickerOcr
 
-        i.setIsAd(model.predict(test))
+        vector = dm.tokenizer2(text)
+        x_vector = pad_sequences(vector, maxlen=vecMaxLen)
+        print(x_vector)
+        isAd = model.predict(x_vector)
+        i.setIsAd(isAd)
+        print(i.getPageUrl(), " : ", i.getIsAd())
     '''
     #한문장씩 테스트 돌리기
     t = model.predict(i.getTitle())

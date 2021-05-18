@@ -2,8 +2,8 @@
 
 class ImagePath:
     def __init__(self):
-        self.__firstImage = None
-        self.__lastImage = None
+        self.__firstImage = ""
+        self.__lastImage = ""
 
     def setFirstImage(self, firstImage):
         self.__firstImage = firstImage

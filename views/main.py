@@ -13,6 +13,7 @@ from service.cnnTest import cnnTest
 #Blueprint클래스로 객체 생성시 이름, 모듈명, url_prefix값 전달
 bp = Blueprint('main', __name__, url_prefix='/')
 
+
 @bp.route('/search', methods=["GET"])
 def form():
     query = request.args['query']
@@ -20,8 +21,12 @@ def form():
     blogPageArray = searchBlog(query)
     blogPageArray = crawlingSource(blogPageArray)
     blogPageArray = ocrTest(blogPageArray)
+    svm(blogPageArray, vecMaxLen)
+    return query
+
+@bp.route('/training', methods=["GET"])
+def train():
+    global vecMaxLen
     x_data, y_data = tokenizer()
     x_sequence = token2vec(x_data)
-    svmTraining(x_sequence, y_data)
-
-    return query
+    vecMaxLen = svmTraining(x_sequence, y_data)

@@ -50,3 +50,17 @@ def token2vec(text_results):
     return sequence
 
 
+def tokenizer2(text):
+    token = okt.pos(text, norm=True, stem=True)
+    word = []
+    text_result = []
+    for w in token:
+        if not w[1] in ["Josa", "Eomi", "Punctuation"]:
+            word.append(w[0])
+    rl = (" ".join(word)).strip()
+    text_result.append(rl)
+    print(text_result)
+    vector = token2vec(text_result)
+
+    return vector
+
