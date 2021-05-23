@@ -9,7 +9,6 @@ class BlogPage:
         self.__sticker = ""
         self.__firstText = ""
         self.__lastText = ""
-        self.__firstOCR = ""
         self.__lastOCR = ""
         self.__stickerOCR = ""
         self.__isAd = ""
@@ -31,9 +30,6 @@ class BlogPage:
 
     def setLastText(self, newLastText):
         self.__lastText = newLastText
-
-    def setFirstOCR(self, newFirstOCR):
-        self.__firstOCR = newFirstOCR
 
     def setLastOCR(self, newLastOCR):
         self.__lastOCR = newLastOCR

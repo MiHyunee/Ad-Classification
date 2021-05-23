@@ -3,8 +3,8 @@ import urllib
 import json
 from model.BlogPage import BlogPage
 
-client_id = "id"
-client_secret = "secret"
+client_id = "_SdymsLP_TCuIfpjPuz7"
+client_secret = "mImtapr7Mh"
 
 def searchBlog(search_word):
     display = "10"
