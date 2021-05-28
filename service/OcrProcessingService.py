@@ -4,36 +4,42 @@ import pytesseract
 import numpy as np
 
 def bwization():
-    img = cv2.imread("/Users/smwu/Desktop/sample_image/bw5.png")
+    img = cv2.imread("/Users/smwu/Desktop/sample_image/bw1.png")
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    r, dst = cv2.threshold(gray,210, 255, cv2.THRESH_BINARY_INV )
+    r, dst = cv2.threshold(gray,215, 255, cv2.THRESH_BINARY_INV)
 
     cv2.imwrite('binary.jpg', dst)
 
     text = pytesseract.image_to_string(dst, config='--psm 3', lang='kor')
     print(text)
-    print(r)
 
-def contour():
-    rgb = cv2.imread("/Users/smwu/Desktop/sample_image/full3.jpg")
+def contour(ec, rec_w, rec_h):
+    rgb = cv2.imread("/Users/smwu/Desktop/sample_image/full5.jpg") #local test
     gray = cv2.cvtColor(rgb, cv2.COLOR_BGR2GRAY)
 
-    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
+    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (ec, ec))
     grad = cv2.morphologyEx(gray, cv2.MORPH_GRADIENT, kernel)
-    _, bw = cv2.threshold(grad, 0.0, 255.0, cv2.THRESH_BINARY | cv2.THRESH_OTSU)
-    kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (9, 3))
+    _, bw = cv2.threshold(grad, 0, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)
+    cv2.imwrite('bw.jpg', bw)
+    kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (rec_w, rec_h))
     connected = cv2.morphologyEx(bw, cv2.MORPH_CLOSE, kernel)
     contours, _ = cv2.findContours(connected.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
     mask = np.zeros(bw.shape, dtype=np.uint8)
+    count = 0
     for idx in range(len(contours)):
         x, y, w, h = cv2.boundingRect(contours[idx])
-        mask[y:y + h, x:x + w] = 0
         cv2.drawContours(mask, contours, idx, (255, 255, 255), -1)
+        cv2.imwrite('mask.jpg',mask)
         r = float(cv2.countNonZero(mask[y:y + h, x:x + w])) / (w * h)
-        if r > 0.5 and w > 8 and h > 8:
-            text = pytesseract.image_to_string(rgb[y:y+h,x:x+w], config='--psm 3', lang='kor')
-            print(text)
-            #cv2.rectangle(rgb, (x, y), (x + w - 1, y + h - 1), (0, 255, 0), 2) #텍스트 영역추출 테스트 코드
-    #cv2.imwrite('divide.jpg', rgb) # 텍스트 영역추출 테스트 코드
+        if r > 0.5 and w > 15 and h > 9:
+            count = count + 1
+            #text = pytesseract.image_to_string(rgb[y:y+h,x:x+w], config='--psm 3', lang='kor')
+            #print(text)
+            cv2.rectangle(rgb, (x, y), (x + w - 1, y + h - 1), (0, 255, 0), 2) #텍스트 영역추출 테스트 코드
+    print(count)
+    cv2.imwrite('divide.jpg', rgb)  # 텍스트 영역추출 테스트 코드용
+    if(count>2):
+        contour(10,35,10)
 
-contour()
+
+contour(3,9,3)
