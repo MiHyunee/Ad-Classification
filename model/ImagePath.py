@@ -2,7 +2,6 @@
 
 class ImagePath:
     def __init__(self):
-        self.__firstImage = ""
         self.__lastImage = ""
 
     def setLastImage(self, lastImage):
