@@ -9,22 +9,27 @@ def crawlingSource(blogArray):
         soup = BeautifulSoup(webpage.content, "html.parser")
 
         # text 추출
-        textArray = []
-        text_all = soup.find('div', {'class': 'se-main-container'})
-        if (text_all == None):
-            text_all = soup.find('div', {'id': 'postViewArea'}).find_all('span')
-        else:
-            text_all = text_all.find_all('span')
-        for text in text_all:
-            t = text.text
-            if (t != '\u200b'):
-                if (('#' not in t) & ('http' not in t)):
-                    tt = t.replace('\n', '').replace('\xa0', '')
-                    if (tt != ''):
-                        textArray.append(tt)
+        try:
+            textArray = []
+            text_all = soup.find('div', {'class': 'se-main-container'})
+            if (text_all == None):
+                text_all = soup.find('div', {'id': 'postViewArea'}).find_all('span')
+            else:
+                text_all = text_all.find_all('span')
+            for text in text_all:
+                t = text.text
+                if (t != '\u200b'):
+                    if (('#' not in t) & ('http' not in t)):
+                        tt = t.replace('\n', '').replace('\xa0', '')
+                        if (tt != ''):
+                            textArray.append(tt)
 
-        i.setFirstText(textArray[0])
-        i.setLastText(textArray[-1])
+            i.setFirstText(textArray[0])
+            i.setLastText(textArray[-1])
+
+        except:
+            i.setFirstText("")
+            i.setLastText("")
 
         #이미지 url 추출
         img = soup.find_all(attrs={'class': 'se-image-resource'})
