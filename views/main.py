@@ -10,6 +10,7 @@ from model.ImagePath import ImagePath
 #Blueprint클래스로 객체 생성시 이름, 모듈명, url_prefix값 전달
 bp = Blueprint('main', __name__, url_prefix='/')
 
+
 @bp.route('/search', methods=["GET"])
 def form():
     query = request.args['query']
@@ -18,6 +19,7 @@ def form():
     blogPageArray = crawlingSource(blogPageArray)
     blogPageArray = ocrTest(blogPageArray)
     svm(blogPageArray)
+
     return query
 
 @bp.route('/training', methods=["GET"])

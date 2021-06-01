@@ -22,3 +22,4 @@ def svm(blogArray):
         print("yPredict: ", isAd)
         i.setIsAd(isAd)
         print(i.getPageUrl(), " : ", i.getIsAd())
+

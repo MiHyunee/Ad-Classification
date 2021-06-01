@@ -73,3 +73,4 @@ def tokenizer(x_data):
         text_results.append(word)
 
     return [w for n in text_results for w in n]
+
