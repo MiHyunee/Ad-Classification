@@ -1,7 +1,5 @@
 import requests
 from bs4 import BeautifulSoup
-from model.BlogPage import BlogPage
-from model.ImagePath import ImagePath
 
 def crawlingSource(blogArray):
     k=0
@@ -33,9 +31,6 @@ def crawlingSource(blogArray):
         if len(img)==0:
             img = soup.find_all(attrs={'class': '_photoImage'})
         if len(img)>0:
-            firstImage = img[0].get("src")
-            firstImageWithSize = firstImage.replace('w80_blur', 'w966')
-            i.getImagePath().setFirstImage(firstImageWithSize)
             lastImage = img[-1].get("src")
             lastImageWithSize = lastImage.replace('w80_blur', 'w966')
             i.getImagePath().setLastImage(lastImageWithSize)
@@ -44,8 +39,6 @@ def crawlingSource(blogArray):
         sticker = soup.find_all(attrs={'class': 'se-sticker-image'})
         if sticker:
             i.setSticker(sticker[-1].get("src"))
-
-        print("{0} sticker: {1}".format(k, i.getSticker()))
         k=k+1
-
     return blogArray
+
