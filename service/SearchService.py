@@ -2,12 +2,14 @@ import ssl
 import urllib
 import json
 
-client_id = "client_id"
-client_secret = "client_secret"
+#client_id = "client_id"
+#client_secret = "client_secret"
 
+client_id = "_SdymsLP_TCuIfpjPuz7"
+client_secret = "mImtapr7Mh"
 
 def searchBlog(search_word):
-    display = "100"
+    display = "10"
     context = ssl._create_unverified_context()
     encText = urllib.parse.quote(search_word)
     url = "https://openapi.naver.com/v1/search/blog?query=" + encText + "&display=" + display
