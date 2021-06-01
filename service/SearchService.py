@@ -3,6 +3,9 @@ import urllib
 import json
 from model.BlogPage import BlogPage
 
+#client_id = "client_id"
+#client_secret = "client_secret"
+
 client_id = "client_id"
 client_secret = "client_secret"
 
