@@ -3,18 +3,15 @@ import urllib
 import json
 from model.BlogPage import BlogPage
 
-#client_id = "client_id"
-#client_secret = "client_secret"
-
 client_id = "client_id"
 client_secret = "client_secret"
 
 
 def searchBlog(search_word):
-    display = "10"
+    display = "7"
     context = ssl._create_unverified_context()
     encText = urllib.parse.quote(search_word)
-    url = "https://openapi.naver.com/v1/search/blog?query=" + encText + "&display=" + display
+    url = "https://openapi.naver.com/v1/search/blog?query=" + encText + "&display=" + display + "&start=" + "11"
     request = urllib.request.Request(url)
     request.add_header("X-Naver-Client-Id", client_id)
     request.add_header("X-Naver-Client-Secret", client_secret)
@@ -42,5 +39,17 @@ def searchBlog(search_word):
 
     else:
         print("Error Code:" + rescode)
+
+    return blogPageArray
+
+
+def dataCrawling(postArray):
+    k = 0
+    blogPageArray = []
+    for url in postArray:
+        blogPageArray.append(BlogPage())
+        split = url.split('/', 5)
+        blogPageArray[k].setPageUrl("https://blog.naver.com/PostView.nhn?blogId=" + split[-2] + "&logNo=" + split[-1])
+        k = k + 1
 
     return blogPageArray

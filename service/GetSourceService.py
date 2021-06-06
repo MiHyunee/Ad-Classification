@@ -8,6 +8,9 @@ def crawlingSource(blogArray):
         webpage = requests.get(url)
         soup = BeautifulSoup(webpage.content, "html.parser")
 
+        title = soup.find('div', {'class': 'se-title-text'}).find('span').text
+        i.setTitle(title)
+        print("title:", i.getTitle())
         # text 추출
         try:
             textArray = []
@@ -25,6 +28,7 @@ def crawlingSource(blogArray):
                             textArray.append(tt)
 
             i.setFirstText(textArray[0])
+            print(i.getFirstText())
             i.setLastText(textArray[-1])
 
         except:
