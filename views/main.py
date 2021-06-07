@@ -19,10 +19,11 @@ def form():
         blogPageArray = dataCrawling(res)
         blogPageArray = crawlingSource(blogPageArray)
         blogPageArray = ocrTest(blogPageArray)
-        blogArray = svm(blogPageArray)
-        print(blogArray)
+        blogArray, predict = svm(blogPageArray)
+        for i in predict:
+            print(i)
 
-        return jsonify(results = blogArray), 200
+        return jsonify(results = predict), 200
 
 
 @bp.route('/training', methods=["GET"])
