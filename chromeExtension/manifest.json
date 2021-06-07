@@ -8,17 +8,9 @@
         "default_title": "EraseAd",
         "default_popup": "popup.html"
     },
-    "background": {
-        "scripts": ["js/jquery-3.6.0.min.js","js/popup.js"],
-        "persistent": false
-    },
     "permissions": [
         "activeTab",
         "<all_urls>",
         "tabs"
-    ],
-    "content_scripts": [{
-        "matches": ["https://section.blog.naver.com/*"],
-        "js": ["js/jquery-3.6.0.min.js"]
-    }]
+    ]
 }
