@@ -10,6 +10,8 @@ from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.linear_model import SGDClassifier
 from sklearn.pipeline import Pipeline
 
+okt=Okt()
+
 def svmTraining():
 
     down_url = "/Users/software/Downloads/dataSet.csv"
@@ -58,19 +60,19 @@ def svmTraining():
 def tokenizer(x_data):
     dictionary = {}
     text_results = []
-    okt = Okt()
-    for text in x_data:
-        token = okt.pos(text, norm=True, stem=True)
-        word = []
-        for w in token:
-            if not w[1] in ["Josa", "Eomi", "Punctuation"]:
-                if len(w[0]) > 1 :
-                    word.append(w[0])
-                if w[0] not in dictionary:
-                    dictionary[w[0]] = 0
-                dictionary[w[0]] +=1
-        #rl = (" ".join(word)).strip()    #문장으로
-        text_results.append(word)
+    #okt = Okt()
+
+    token = okt.pos(x_data, norm=True, stem=True)
+    word = []
+    for w in token:
+        if not w[1] in ["Josa", "Eomi", "Punctuation"]:
+            if len(w[0]) > 1:
+                word.append(w[0])
+            if w[0] not in dictionary:
+                dictionary[w[0]] = 0
+            dictionary[w[0]] += 1
+        # rl = (" ".join(word)).strip()    #문장으로
+    text_results.append(word)
 
     return [w for n in text_results for w in n]
 
