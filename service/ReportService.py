@@ -1,12 +1,9 @@
-from time import sleep
-
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait as wait
 from selenium.webdriver.common.alert import Alert
 from selenium.webdriver.common.keys import Keys
-import time
 import pyperclip
 
 
@@ -19,8 +16,8 @@ def report(url):
 
     #네이버 로그인
     loginUrl = 'https://nid.naver.com/nidlogin.login?mode=form&url=https%3A%2F%2Fwww.naver.com'
-    uid = 'll55kk'
-    upw = 'wndghkalsrnr'
+    uid = 'id'
+    upw = 'pw'
 
     driver.get(loginUrl)
     pyperclip.copy(uid)
@@ -59,5 +56,3 @@ def report(url):
                 print('good')
                 #driver.find_element_by_id('btn btn_confrm').click()
                 #완료되었음을 알려주기
-
-report(url)
