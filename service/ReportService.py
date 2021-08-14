@@ -13,7 +13,8 @@ def check_alert(driver): #경고창 확인하는 함수
     except NoAlertPresentException:
         return False
 
-def report(url):
+def reporting(url):
+    print("&&&&&&&&&&start&&&&&&&&&&&")
     driver = webdriver.Chrome()
 
     #네이버 로그인
@@ -55,3 +56,4 @@ def report(url):
     print('good')
     #driver.find_element_by_id('btn btn_confrm').click()
     #완료되었음을 알려주기
+
