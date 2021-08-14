@@ -13,11 +13,7 @@ def check_alert(driver): #경고창 확인하는 함수
     except NoAlertPresentException:
         return False
 
-def report():
-    # front에서 URL받아오기
-    url = 'ddd'
-    # url = 'https://blog.naver.com/ll55kk678/222430846656' #크롤링할때처럼 PostView어쩌고 말고 다른걸로 바꿔야
-
+def report(url):
     driver = webdriver.Chrome()
 
     #네이버 로그인
@@ -59,5 +55,3 @@ def report():
     print('good')
     #driver.find_element_by_id('btn btn_confrm').click()
     #완료되었음을 알려주기
-
-report()
