@@ -14,13 +14,12 @@ def check_alert(driver): #경고창 확인하는 함수
         return False
 
 def reporting(url):
-    print("&&&&&&&&&&start&&&&&&&&&&&")
     driver = webdriver.Chrome()
 
     #네이버 로그인
     loginUrl = 'https://nid.naver.com/nidlogin.login?mode=form&url=https%3A%2F%2Fwww.naver.com'
-    uid = 'll55kk'
-    upw = 'wndghkalsrnr'
+    uid = 'id'
+    upw = 'pw'
 
     driver.get(loginUrl)
     pyperclip.copy(uid)
