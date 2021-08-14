@@ -4,9 +4,7 @@ from service.GetSourceService import crawlingSource, rxCrawling
 from service.OcrService import ocrTest, rxOcr
 from service.SvmService import svm, rxSvm
 from service.SvmTrainingService import svmTraining
-from service.ReportService import report
-from model.BlogPage import BlogPage
-from model.ImagePath import ImagePath
+from service.ReportService import reporting
 from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
 import time
 
@@ -59,6 +57,6 @@ def concurrent():
 @bp.route('/report', methods=['POST'])
 def report():
     url = request.get_json()[0]
-    report(url)
+    reporting(url)
 
     return '', 204
