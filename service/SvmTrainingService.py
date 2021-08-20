@@ -1,4 +1,3 @@
-#from sklearn import svm, metrics
 import numpy as np
 import pandas as pd
 import joblib
@@ -60,7 +59,6 @@ def svmTraining():
 def tokenizer(x_data):
     dictionary = {}
     text_results = []
-    #okt = Okt()
 
     token = okt.pos(x_data, norm=True, stem=True)
     word = []

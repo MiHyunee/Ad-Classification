@@ -29,7 +29,7 @@ def reporting(url):
 
     wait(driver,3).until(EC.element_to_be_clickable((By.ID, 'log.login'))).click()
     if(driver.current_url != "https://www.naver.com/"):
-        print('로그인 실패')  # 로그인 실패했다고 알려주기
+        print('로그인 실패')
         driver.quit()
 
     # 신고페이지로 이동
@@ -50,9 +50,8 @@ def reporting(url):
 
     if(check_alert(driver)):
         driver.quit()
-        print('등록 실패')#등록실패 사실 프론트에 알려주기
+        print('등록 실패')
 
     print('good')
     #driver.find_element_by_id('btn btn_confrm').click()
-    #완료되었음을 알려주기
 

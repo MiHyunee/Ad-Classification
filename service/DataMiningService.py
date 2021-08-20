@@ -35,8 +35,6 @@ def tokenizer() :
     with open(prep_file, 'w', encoding='utf-8') as make_file:
         json.dump(text_results, make_file, ensure_ascii=True)
 
-    #tokens = [t for d in text_results for t in d]
-    #print(len(tokens))
 
     return text_results, y_data
 
@@ -45,7 +43,6 @@ def token2vec(text_results):
     tokenizer = Tokenizer(num_words=vocab_size)
     tokenizer.fit_on_texts(text_results)
     sequence = tokenizer.texts_to_sequences(text_results)
-    #print(sequence)
 
     return sequence
 

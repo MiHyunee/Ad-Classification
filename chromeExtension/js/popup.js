@@ -85,7 +85,7 @@ $(document).ready(function(){
           }, function(result) {
                 var data = {'url': result};
                 $.ajax({
-                url: 'http://127.0.0.1:5000/concurrent',
+                url: 'http://127.0.0.1:5000/search',
                 type: 'post',
                 dataType: 'json',
                 contentType: "application/json; charset=utf-8",
