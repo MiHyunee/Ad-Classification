@@ -1,10 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, request, jsonify
-from service.SearchService import dataCrawling
-from service.GetSourceService import rxCrawling
-from service.OcrService import rxOcr
-from service.SvmService import rxSvm
-from service.SvmTrainingService import svmTraining
+from service.SvmService import SvmService
 from service.ReportService import reporting
+from service.SourceService import SourceService
 from concurrent.futures import ThreadPoolExecutor
 import time
 
@@ -13,24 +10,19 @@ bp = Blueprint('main', __name__, url_prefix='/')
 
 @bp.route('/training', methods=["GET"])
 def train():
-    svmTraining()
+    svm.svmTraining()
 
-def flow(blogArray):
-    blogPageArray = rxCrawling(blogArray)
-    blogPageArray = rxOcr(blogPageArray)
-    predict = rxSvm(blogPageArray)
-    return predict
+    return '', 204
 
 @bp.route('/search', methods=["POST"])
 def concurrent():
-    print("****병렬****")
     res = request.get_json()[0]
-    blogPageArray = dataCrawling(res)
+    blogPageArray = SourceService.transform_url(res)
 
     concurrentTime = time.time()
 
     pool = ThreadPoolExecutor(max_workers=4)
-    results = list(pool.map(flow, blogPageArray))
+    results = list(pool.map(svmService.rxSvm, blogPageArray))
 
     print(time.time()-concurrentTime)
     return jsonify(results=results), 200
@@ -41,3 +33,10 @@ def report():
     reporting(url)
 
     return '', 204
+
+@bp.before_app_first_request
+def setUp():
+    global svm
+    svm = SvmService()
+    global svmService
+    svmService = SvmService()
