@@ -31,7 +31,6 @@ def reporting(url):
     if(driver.current_url != "https://www.naver.com/"):
         driver.quit()
         return error_response("로그인에 실패했습니다", "LoginError", 1001)
-        #raise LoginError
 
     # 신고페이지로 이동
     driver.get('https://help.naver.com/support/contents/contents.help?serviceNo=964&categoryNo=2826')
