@@ -14,7 +14,6 @@ def check_alert(driver): #경고창 확인하는 함수
         return False
 
 def reporting(url):
-    url = "dd"
     driver = webdriver.Chrome()
 
     #네이버 로그인
