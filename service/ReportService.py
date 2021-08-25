@@ -18,8 +18,8 @@ def reporting(url):
 
     #네이버 로그인
     loginUrl = 'https://nid.naver.com/nidlogin.login?mode=form&url=https%3A%2F%2Fwww.naver.com'
-    uid = 'll55kk'
-    upw = 'wndghkalsrnr'
+    uid = 'id'
+    upw = 'pw'
 
     driver.get(loginUrl)
     pyperclip.copy(uid)
