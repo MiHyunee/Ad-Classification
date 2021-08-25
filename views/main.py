@@ -1,9 +1,10 @@
-from flask import Blueprint, render_template, redirect, url_for, request, jsonify
+from flask import Blueprint, request, jsonify
 from service.SvmService import SvmService
 from service.ReportService import reporting
 from service.SourceService import SourceService
 from concurrent.futures import ThreadPoolExecutor
 import time
+
 
 #Blueprint클래스로 객체 생성시 이름, 모듈명, url_prefix값 전달
 bp = Blueprint('main', __name__, url_prefix='/')
@@ -30,9 +31,7 @@ def concurrent():
 @bp.route('/report', methods=['POST'])
 def report():
     url = request.get_json()[0]
-    reporting(url)
-
-    return '', 204
+    return reporting(url)
 
 @bp.before_app_first_request
 def setUp():
@@ -40,3 +39,4 @@ def setUp():
     svm = SvmService()
     global svmService
     svmService = SvmService()
+
