@@ -19,11 +19,8 @@ def get_records(streamName):
         record_response = client.get_records(ShardIterator=record_response['NextShardIterator'], Limit=10)
         # get_records 매번 호출시마다 NextShardIterator 값이 나오므로, 그걸로 session(?)을 유지해서 놓치는 데이터가 없도록 함.
 
-        #페이지 연결되면 삭제 (확인용 출력 코드)
-        records = record_response['Records']
-        if len(records) > 0:
-            for x in records:
-                print('data: {}'.format(x['Data']))
-            print('===============')
+        response = record_response['Records']
+        if(len(response)>0):
+            print(response) #페이지 연결되면 삭제 (확인용 출력 코드)
+            return record_response['Records']
 
-        time.sleep(5)
