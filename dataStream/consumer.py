@@ -2,14 +2,16 @@ import boto3
 import time
 
 def get_records(streamName):
-    client = boto3.client('kinesis', region_name='ap-northeast-1', aws_access_key_id='AKIARW7HGNHWTGRI2GVZ', aws_secret_access_key='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')
+    key_id = ''
+    secret_key = ''
+    client = boto3.client('kinesis', region_name='ap-northeast-1', aws_access_key_id=key_id, aws_secret_access_key=secret_key)
 
     response = client.describe_stream(StreamName=streamName)
 
     my_shard_id = response['StreamDescription']['Shards'][0]['ShardId']
     # shard가 여러개이거나 reshard되어 일시적으로 여러개인 경우 Shards 갯수만큼 for loop 해야함.
 
-    shard_iterator = client.get_shard_iterator(StreamName=streamName, ShardId=my_shard_id, ShardIteratorType='TRIM_HORIZON')
+    shard_iterator = client.get_shard_iterator(StreamName=streamName, ShardId=my_shard_id, ShardIteratorType='LATEST')
 
     my_shard_iterator = shard_iterator['ShardIterator']
 
@@ -22,5 +24,5 @@ def get_records(streamName):
         response = record_response['Records']
         if(len(response)>0):
             print(response) #페이지 연결되면 삭제 (확인용 출력 코드)
-            return record_response['Records']
+            return response
 
