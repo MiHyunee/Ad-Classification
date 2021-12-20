@@ -27,7 +27,22 @@
             <button class="btn btn-success">신고 URL 출력</button>
             <br><br>
             <div class="bg-light border rounded-3">
-                <br><br><br><br><br>url 목록<br><br><br><br><br>
+                <script>
+		    var url = {'url': result};
+		    $.ajax({
+                url: 'http://127.0.0.1:5000/report',
+                type: 'get',
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(result),
+                success: function (data) {
+                    document.write('val :' + val + '<br>');
+                },
+                error: function (error) {
+                    console.log("error");
+                }
+                }) 
+	    </sciprt>
             </div>
         </div>
     </div>
