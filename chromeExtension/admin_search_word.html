@@ -15,9 +15,9 @@
                 <span class="fs-4">Ad-Classification</span>
             </a>
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="#" class="nav-link px-2 link-secondary">소개</a></li>
-                <li><a href="#" class="nav-link px-2 link-dark">검색어 로그</a></li>
-                <li><a href="#" class="nav-link px-2 link-dark">신고 url 로그</a></li>
+                <li><a href="admin_home.html" class="nav-link px-2 link-secondary">소개</a></li>
+                <li><a href="admin_search_report.html" class="nav-link px-2 link-dark">검색어 로그</a></li>
+                <li><a href="admin_report.html" class="nav-link px-2 link-dark">신고 url 로그</a></li>
             </ul>
          </header>
     </div>
@@ -27,7 +27,22 @@
             <button class="btn btn-success">검색어 로그 출력</button>
             <br><br>
             <div class="bg-light border rounded-3">
-                <br><br><br><br><br>로그출력 내용<br><br><br><br><br>
+                <script>
+		    var word = {'url': result};
+		    $.ajax({
+                url: 'http://127.0.0.1:5000/search',
+                type: 'get',
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(result),
+                success: function (data) {
+                    document.write('val :' + val + '<br>');
+                },
+                error: function (error) {
+                    console.log("error");
+                }
+                }) 
+	    </sciprt>
             </div>
         </div>
     </div>
@@ -35,9 +50,9 @@
     <div class="container">
       <footer class="py-3 my-4">
         <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-          <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">소개</a></li>
-          <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">검색어 로그</a></li>
-          <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">신고 URL 로그</a></li>
+          <li class="nav-item"><a href="admin_home.html" class="nav-link px-2 text-muted">소개</a></li>
+          <li class="nav-item"><a href="admin_search_word.html" class="nav-link px-2 text-muted">검색어 로그</a></li>
+          <li class="nav-item"><a href="admin_report.html" class="nav-link px-2 text-muted">신고 URL 로그</a></li>
         </ul>
         <p class="text-center text-muted">© 2021 Ad-Classification</p>
       </footer>
