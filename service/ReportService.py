@@ -54,7 +54,7 @@ def reporting(url):
 
     #driver.find_element_by_id('btn btn_confrm').click()
     driver.quit()
-    return '', 204
+    return url, 204
 
 def error_response(user_error_message, dev_error_message, status_code):
     response = {
